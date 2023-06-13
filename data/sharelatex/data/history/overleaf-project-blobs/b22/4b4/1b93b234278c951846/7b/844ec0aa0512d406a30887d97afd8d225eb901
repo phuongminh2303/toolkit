@@ -1,0 +1,35 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+
+\subsection{Context and Motivation}
+In recent years, lung cancer has become more and more common in both man and woman. In 2018, there were 25.335 new cases of lung cancer reported in Vietnam and 20.710 cases lead to death making this cancer become the second most dangerous cancer in Vietnam \cite{GLOBOCAN}. Due to the negative effect of lung cancer on our society, research on this type of cancer occupies one of the major focuses of the research community. And obviously, early stage detection can save thousands of patients every year. \par
+The Lung Cancer Care is a successful project that provides lung nodule detection service via the web interface to the end users such as doctors in the K hospital. At the moment, this application server is running inside two virtual machines in the ICTLab network and they are  communicating through SSH connection. The developer decided to use virtual machines so that the LCC application is isolated to other running applications in the same network. This architecture has been proved to be stable and secure. However, virtual machines consume unnecessary overhead and suffer from reduced performance in most of the operations \cite{Virtualization-issues}. In addition, the scaling and the software update of the LCC project are time-consuming, since the startup time of a virtual machine can be several minutes \cite{VM-Startup-Time}. \par
+Containerization technology has evolved considerably and became a challenger to the traditional virtualization \cite{Hypervisor-vs-Lightweight}. This technology offers a solution for eleminating overhead by using kernel namespaces and control groups of the host to create an isolated environment. In this internship, we studied and implemented a new container-based architecture for the LCC project, then we examined and evaluated the performance of this new approach. Additionally, we decided to use Docker platform since it is well-supported by the community and easier to implement than other candidates.
+
+\subsection{Internship Objective}
+This internship is integrated in the Lung Cancer Care project in the ICTLab. However, the internship only focuses on the deployment process of this project on the laboratory's network. At present, the LCC application is deployed in two virtual machines and the ICTLab members are interested in migrating the system using container technology such as Docker. 
+\par
+The goal of this internship is to outline a new approach for the deployment of the Lung Cancer Care project using container-based architecture. Second, the thesis discusses Docker and containerization technologies by doing literature review. Next, the thesis is done by a proof-of-concept, which includes the current state of the Lung Cancer Care project, the new architecture proposal and the practical implementation of this project that utilizes container technology. Then, by analyzing the results from that practical implementation, this thesis concludes the advantages and requirements of container technology. Finally, the thesis suggests a general guideline that one should follow when developing applications using containerizing technology, especially the Docker platform.
+
+\biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
+\end{document}
+
+% Section 1.1
+% \subsection{Problem Statement}
+
+% \lipsum[10-14] % dummy text
+
+% Section 1.1.1
+% \subsubsection{This is a subheading}
+
+% \lipsum[15-17] % dummy text
+
+%Section 1.1.1.1
+% \paragraph{This is a paragraph}
+
+% \lipsum[18-19] % dummy text
+
+% cite
+% I am here citing one of my sources \citep{ISLR}.
+
+% \biblio % Needed for referencing to working when compiling individual subfiles - Do not remove

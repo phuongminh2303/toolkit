@@ -1,0 +1,11 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+Because of the scaling requirement in the future, more effective visualization methods are needed for the Lung Cancer Care project. In this thesis, containerization architecture was introduced and proposed to be one excellent solution for the problem. This technology was compared to the traditional virtualization and their pros and cons were discussed as well. Also, the thesis introduced a brief overview of Docker, which is the most popular containering platform in the market.
+\par
+Benefits of containerization are undeniable, especially in the deployment phase of software development life cycle. In the traditional virtualization approach, even a small update to some service requires compiling of a new virtual machine image. As a result, the deployment process of a large virtual machine contains several issues and the startup time can last minutes. On the other hand, containers take seconds to start so that they boost up the deployment process. 
+\par
+In this thesis, we examined the implementation of the Lung Cancer Care project using container-based technology. This design was carried out by a practical proof-of-concept, where two main components (Frontend and Flaskapp) of the existing LCC application were moved into containers. Next, the practical implementation was evaluated in terms of resource utilization, image build time and storage size on the disk. From the result, we concluded that there is no difference in resource usage, such as CPU and Memory,  between an application running inside a container and non-container environment. Compared to the current virtualization architecture, the new container-based architecture performs significantly in terms of startup time, storage size and deployment steps.
+
+\biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
+\end{document}
+

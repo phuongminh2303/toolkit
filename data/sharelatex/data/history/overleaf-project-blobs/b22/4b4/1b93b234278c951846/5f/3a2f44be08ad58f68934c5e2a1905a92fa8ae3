@@ -1,0 +1,14 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+
+Lung Cancer (LC) is one of the deadliest diseases in the world, however, it is the second most common cancer among both men and women. The usage of technological development in early stage detection, especially machine learning and image processing, is potentially saving thousands of lives every year. In ICT Department and ICTLab, Lung Cancer Care (LCC) is a successful project that provides a LC detection tool via web interface for supporting doctors in lung cancer diagnosis.  Currently, the LCC web application is running inside virtual machines on the ICTLab’s network. This architecture offers a high stable and isolation environment. 
+\par
+However, the virtual machines contain overhead, which slows the system down a lot, and they are resource-hungry as well. In recent years, containerization technology has become more common as a replacement for the traditional virtualization. A container is a standard unit of containerization that packages up an application and its dependencies into an executable environment. Since containers do not contain additional operating systems or unnecessary services, the processes running inside them perform much faster but less resource-heavy compared to virtual machines.
+\par
+The thesis investigates how the current LCC system can be adopted into containers using Docker platform. It discusses theories of containerization and related tools, then proposes a new container-based architecture for the application. The result of this thesis consists of one architectural proposal for the model deployment part in the LCC project and one proposed system for the LCC web application. The evaluation represents that the container-based system performs similarly to the system without container, but it is more efficient than virtualization. 
+
+
+\textbf{\textit{Keywords --}} Containerization, Virtualization, Docker, Application Encapsulation 
+
+\biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
+\end{document}

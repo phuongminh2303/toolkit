@@ -1,0 +1,58 @@
+\begin{thebibliography}{8}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[tra(2022)]{trannguyenloc}
+Màu răng phổ biến của sinh viên Đại học y dược thành phố
+  hồ chí minh.
+\newblock \emph{Đại học Y Dược Thành phố Hồ Chí Minh}, 1\penalty0
+  (9):\penalty0 full, 2022.
+
+\bibitem[Châu(2013)]{NguyenThiChau}
+Nguyễn~Thị Châu.
+\newblock Nghiên cứu hiệu quả điều trị tẩy trắng răng sống
+  nhiễm sắc tetracycline.
+\newblock \emph{Luận án tiến sĩ Y học - Đại học Y Hà Nội},
+  1,2,3\penalty0 (6):\penalty0 17--162, 2013.
+
+\bibitem[Greenwall(2019)]{LindaGreenwall2019}
+Linda Greenwall.
+\newblock Whitening for patients younger than 18: Index of treatment need.
+\newblock \emph{Pocket Dentistry}, 1\penalty0 (2):\penalty0 1--10, 2019.
+
+\bibitem[Guimarães(2021)]{Renata2021}
+Renata~Pedrosa Guimarães.
+\newblock Dental whitening: Self-referred needs versus professional indication.
+\newblock \emph{Pesquisa Brasileira em Odontopediatria e Clínica Integrada
+  2022}, 1\penalty0 (2):\penalty0 1--10, 2021.
+
+\bibitem[Quyên(2015)]{trinhthitoquyen}
+Trịnh Thị~Tố Quyên.
+\newblock Tình trạng sức khoẻ răng miệng, các yếu tố liên quan
+  và hiệu quả chương trình nâng cao sức khoẻ răng miệng trên
+  sinh viên năm thứ nhất trường Đại học sài gòn năm 2015.
+\newblock \emph{Đại học Y Dược Thành phố Hồ Chí Minh}, 3\penalty0
+  (5):\penalty0 32--87, 2015.
+
+\bibitem[và~cộng sự(2022)]{trinhminhbau}
+Trịnh Minh~Báu và~cộng sự.
+\newblock Một số yếu tố liên quan đến thực trạng sâu răng
+  của sinh viên năm thứ nhất trường Đại học y hà nội năm
+  học 2020-2021.
+\newblock \emph{Đại học Y Hà Nội}, 1\penalty0 (9):\penalty0 1--9, 2022.
+
+\bibitem[Đình Khởi; PGS.TS. Phạm Như~Hải(2022)]{TruongDinhKhoi}
+TS.~Trương Đình Khởi; PGS.TS. Phạm Như~Hải.
+\newblock Bài giảng "phân tích màu sắc".
+\newblock \emph{ĐHYD}, 2\penalty0 (1):\penalty0 6--35, 2022.
+
+\bibitem[đào~tạo Răng Hàm~Mặt(2013)]{sachchuarangnoinha}
+Viện đào~tạo Răng Hàm~Mặt.
+\newblock Sách "chữa răng và nội nha".
+\newblock \emph{Đại học Y Hà Nội}, 8\penalty0 (2,3):\penalty0 127--148,
+  2013.
+
+\end{thebibliography}

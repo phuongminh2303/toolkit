@@ -1,0 +1,167 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+
+% % The next for lines makes sure numbering in the appendix is correct - DO NOT CHANGE
+\renewcommand{\thesubsection}{A\arabic{subsection}}
+\renewcommand{\thetable}{A\arabic{subsection}.\arabic{table}}
+\counterwithin{table}{subsection}
+\counterwithin{figure}{subsection}
+% %--------------------------------------------------------------
+
+\section*{Docker build output of the Model Deployment}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos
+]
+{shell}
+0 | Sending build context to Docker daemon  476.6MB
+0 | Step 1/8 : FROM python:3.7-slim-buster
+0 | ---> 4cbd5021babc
+0 | Step 2/8 : RUN apt-get update -y && apt-get install build-essential
+2 | ---> Running in a1a4da8bcd8f
+30 | Step 3/8 : RUN pip install --upgrade pip==20.1.1
+30 | ---> Running in 470de462715e
+33 | Removing intermediate container 470de462715e
+33 | ---> 77aadcad1914
+33 | Step 4/8 : WORKDIR /app
+33 | ---> Running in d0625f459f14
+33 | Removing intermediate container d0625f459f14
+33 | ---> 9c77f2840bf5
+33 | Step 5/8 : COPY requirements.txt ./
+34 | ---> 1e8adeb6f218
+34 | Step 6/8 : RUN pip install --no-cache-dir -r requirements.txt
+34 | ---> Running in 95bfd29cb4a5
+129 | Removing intermediate container 95bfd29cb4a5
+129 | ---> dca66999da98
+129 | Step 7/8 : COPY . .
+167 | ---> 6de85b4e3144
+167 | Step 8/8 : CMD ["python", "test_model.py"]
+167 | ---> Running in d12c62b9a002
+167 | Removing intermediate container d12c62b9a002
+167 | ---> 90041b402b62
+168 | Successfully built 90041b402b62
+169 | Successfully tagged phuongminh2303/testmodel:v3
+\end{minted}
+
+\section*{Dockerfile of the Flaskapp component}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos
+]
+{docker}
+FROM python:2.7.18-stretch
+
+LABEL author="phuongdnm(phuongminh2303@gmail.com)"
+
+RUN pip install --upgrade pip
+
+WORKDIR /app
+
+COPY . .
+
+RUN pip install -r requirements.txt
+
+ENTRYPOINT ["uwsgi", "--socket", "0.0.0.0:5000", "--protocol=http", "-w", "wsgi"]
+\end{minted}
+
+\section*{Dockerfile of the Frontend component}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos
+]
+{docker}
+FROM staticfloat/nginx-certbot
+
+LABEL author="phuongdnm(phuongminh2303@gmail.com)"
+
+COPY ./ /usr/share/nginx/html
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY ./nginx/default.conf /etc/nginx/conf.d/
+\end{minted}
+
+\section*{Nginx web server configuration}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos
+]
+{nginx}
+server {
+	listen 443 ssl;
+	server_name lcc.sontg.net;
+	ssl_certificate /etc/letsencrypt/live/lcc.sontg.net/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/lcc.sontg.net/privkey.pem;
+
+	location ~ /.well-known/acme-challenge {
+		allow all;
+		root /usr/share/nginx/html;
+	}
+
+	root /usr/share/nginx/html;
+	index index.html index.htm;
+
+	location / {
+		location ~* \.(html|js|css|jpg|png)$ {
+			# add_header Cache-Control "max-age=31536000";
+			add_header 'Access-Control-Allow-Origin' '*';
+			add_header 'Access-Control-Allow-Credentials' 'true';
+			add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+			add_header 'Access-Control-Allow-Headers' 'Accept,Content-Type';
+		}
+		ssi on;
+		rewrite ^/detect/(.*)$ /detect?$1 last;
+		rewrite ^/classify/(.*)$ /classify?$1 last;
+		try_files $uri $uri.html $uri/ =404;
+	}
+
+	location ~ small_light[^/]*/(.+)$ {
+		set $file $1;
+		rewrite ^ /$file;
+	}
+
+	client_header_timeout 3000;
+	client_body_timeout 3000;
+	client_max_body_size 3200m;
+
+	location /service/ {
+		proxy_pass http://flaskapp:5000/;
+		proxy_set_header Connection "";
+		send_timeout 600;
+		proxy_connect_timeout 600s;
+		proxy_send_timeout 600s;
+		proxy_read_timeout 600s;
+	}
+	
+	location /data/ {
+		add_header Cache-Control 'no-store, no-cache,
+		must-revalidate, proxy-revalidate, max-age=0';
+		expires off;
+		try_files $uri $uri.csv $uri/ =404;
+	}
+	
+}
+
+server {
+	return 301 https://lcc.sontg.net$request_uri;
+}
+\end{minted}
+
+\biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
+\end{document}

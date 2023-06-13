@@ -4,8 +4,3 @@
 tmp/
 *.swp
 
-config/**/*
-!config/.gitkeep
-
-data/**/*
-!data/.gitkeep

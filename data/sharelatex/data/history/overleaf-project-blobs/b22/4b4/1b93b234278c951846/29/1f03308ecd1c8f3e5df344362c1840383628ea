@@ -1,0 +1,71 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+This section covers the necessary topics to understand the thesis. The Literature review section describes the technologies and, from an architectural point of view, how these technologies implement on the host machine. Furthermore, this section also discusses the comparison between the two technologies. Next, the Docker Overview section briefly introduces the architecture and components of Docker, which is the most beloved containerizing technology in the market.
+\par
+This thesis is only focusing on the Docker platform and how this containerization technology is implemented in the Lung Cancer Care project. Other containerization technologies, such as \emph{Linux Container (LXC)}, and lightweight virtualization solutions, such as \emph{unikernels}, are not considered in this thesis. Docker installation is also not mentioned as well.
+
+\subsection{Literature review}
+\subsubsection{Virtualization}
+Virtualization is a technology that enables computers to run multiple OS’s in parallel by locating them in VMs which are managed by a hypervisor \cite{Virtualization-issues}. The hypervisor ensures that VM’s have access to a predefined amount of resources (such as CPU, memory and disk space) in the host machine. Virtualization technology can be classified into two categories below\cite{Virtualization-types}.
+\begin{itemize}
+    \item Type 1: bare-metal hypervisors which run directly on top of the hardware. Some popular platforms of this type are Microsoft Hyper-V, VMware ESXi and Citrix XenServer.
+    \item Type 2: hosted hypervisor which requires to be run on top of an existing OS. Oracle and VMWare provides two popular platforms for this type which are VMWare Workstation and Oracle VM VirtualBox.
+\end{itemize}
+\par
+The benefits virtualization provides are security, availability and scalability \cite{Virtualization-issues}. Visually, each virtual machine looks like a data folder, which can be moved or copied easily. If one virtual machine becomes infected or corrupted, it will be kept separate from other virtual machines as well as the host servers. However, since each virtual machine is running its own OS and emulating the hardware necessary to power it, they consume an enormous amount of memory and power \cite{Virtualization-issues}. Also, the software development life cycle is more complex and challenging with virtual machines.
+
+\subsubsection{Containerization}
+Containerization is a technology where the OS kernel supports multiple isolated user-space environments \cite{container-intro}. In such architecture, the isolated environments are called containers. Containers share the host OS kernel with each other, and this shared part is read-only. The figure \ref{fig:architecture-vm-con} illustrates the architectural comparison between virtualization and containerization.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/VM-Container.pdf}
+    \caption{Architectures of virtualization and containerization}
+    \label{fig:architecture-vm-con}
+\end{figure}
+\par
+Since the resources are not divided into separate operating systems (for multiple VMs), containerization allows a much quicker and lightweight deployment of applications. The table \ref{table:comparison-vm-con} compares the general differences between the two technologies. \par
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{A4C2F4} 
+\multicolumn{1}{|c|}{\cellcolor[HTML]{A4C2F4}\textbf{Virtualization}}                            & \multicolumn{1}{c|}{\cellcolor[HTML]{A4C2F4}\textbf{Containerization}}                           \\ \hline
+Hardware-level virtualization                                                                    & Operating system virtualization                                                                  \\ \hline
+\begin{tabular}[c]{@{}l@{}}Each virtual machine runs in its own operating \\ system\end{tabular} & All containers share the host operating system                                                   \\ \hline
+More secure and fully isolated                                                                   & Less secure and isolated at the process level                                                    \\ \hline
+Heavyweight, high resource usage                                                                 & Lightweight, less resource usage                                                                 \\ \hline
+Startup time in minutes and slow provisioning                                                    & \begin{tabular}[c]{@{}l@{}}Startup time in milliseconds and quicker \\ provisioning\end{tabular} \\ \hline
+\end{tabular}%
+}
+\caption{Comparison between virtualization and containerization}
+\label{table:comparison-vm-con}
+\end{table}
+In short, virtualization enables machines to run multiple OS’s on the hardware of a single physical server, while containerization allows to deploy multiple applications using the same OS on a single machine or server. However, putting multiple containers inside a virtual machine or a virtual machine inside of a container are excellent architectures to achieve both technologies’ advantages. 
+\par
+There are several available containerization engines such as Linux Containers (LXC) and Docker, which is the main technology used in this internship. \par
+
+\subsection{Docker Overview}
+Docker is an open source platform that packages and manages applications, softwares and their dependencies together in the form of a docker container to ensure that application works seamlessly in any environment. After the first release in 2013 by Docker Inc, Docker continues dominating and becomes the first choice for containering applications in the developer community. \par
+The core component of Docker is Docker Engine, which is composed of three well differentiated elements: Docker Client, Docker Daemon and Docker Registry. The figure \ref{fig:docker-architecture-overview} represents those elements and their functionalities in Docker Engine.\par
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/Docker-Architecture.pdf}
+    \caption{Docker Architecture overview}
+    \label{fig:docker-architecture-overview}
+\end{figure}
+\par
+The first element in Docker Engine is Docker Client. Docker Client allows the user to communicate and interact with Docker Engine via a command line interface. A REST API is used for transferring users’ commands from Client CLI to Docker Daemon. Next, Docker Daemon uses libcontainer to process the commands from the Client to create a container environment. Moreover, the daemon plays an important role in managing Docker objects such as images and containers. Docker images are read-only binary templates required to build new containers. An image consists of an application, its dependencies and a default command to execute when a new container starts. Generally, a Docker Image is built from a Dockerfile. \par
+Docker Container is the most important object in Docker Ecosystem. Container is a sort of encapsulated environment in which the application is running. Since it is defined by an image, the container only has access to resources that are defined in that image. For instance, a container initialized by a Python application can not execute any Java programs. The diagram \ref{fig:docker-container-lifecycle} exlains a Docker Container lifecycle. \par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/Container-Lifecycle.pdf}
+    \caption{Docker Container lifecycle}
+    \label{fig:docker-container-lifecycle}
+\end{figure}
+\par
+A Docker container has five states in total. First, a new container is initialized by an image and this container can be run immediately or saved for later usage. A running container can be paused in order to pause all processing running inside it, or can be stopped to completely shut down the container. 
+\par
+In this thesis, Docker platform is selected to containerize the LCC application since Docker is easy to implement and well-documented. Additionally, Docker is becoming a standardization of container technology due to the contribution of the developer community. In general, it takes less time to learn and understand this platform because of the large amount of available resources on the internet.  
+\biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
+\end{document}

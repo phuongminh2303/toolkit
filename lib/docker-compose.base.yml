@@ -18,6 +18,7 @@ services:
           REDIS_PORT: "${REDIS_PORT}"
           SHARELATEX_MONGO_URL: "${MONGO_URL}"
           SHARELATEX_REDIS_HOST: "${REDIS_HOST}"
+          PATH: /usr/local/texlive/2022/bin/x86_64-linux:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
           V1_HISTORY_URL: "http://sharelatex:3100/api"
         env_file:
             - ../config/variables.env

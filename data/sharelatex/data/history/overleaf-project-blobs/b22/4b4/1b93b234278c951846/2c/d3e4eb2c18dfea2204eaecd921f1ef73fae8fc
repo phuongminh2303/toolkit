@@ -1,0 +1,231 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+This chapter represents the implementation of container-based architecture for the LCC application. There are two components in the LCC application needed to consider: model deployment and the web interface. This chapter illustrates the current state of these two components in the first section, then proposes a new container-based architecture in the second section. Finally, the chapter goes through the implementation using Dockerfile and Docker-Compose, which are two available tools in Docker Ecosystem.
+
+\subsection{Application Current State}
+\subsubsection{Model Deployment on a new platform}
+At the moment, the lung detection model is only developed and tested within a private server in ICTLab which is quite difficult for collaborative purposes in the future. This means if the developer team wants to test their model in another environment (for instances, Amazon Elastic Beanstalk or Google Cloud AI Platform), they need to bring the entire codebase and python environment to the new server. The figure \ref{fig:current-strategy} demonstrates the current steps required to set up a new model testing environment. A developer has to upload the codebase and model files then pay more work on installing python versions, frameworks and toolkits in order to achieve a working environment. Hence, this time-consuming workflow is one of the biggest obstacles that slows down the testing phase in a machine learning project. \par
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/Testing-progress.pdf}
+    \caption{Current strategy to setup a new testing model environment}
+    \label{fig:current-strategy}
+\end{figure}
+Fortunately, containerizing technology can solve this challenge. Docker can fully encapsulate not just the training and testing codebase, but the entire dependency stack we need to execute the machine learning model. What we get is a model testing environment that is consistent and portable for both collaboration and scaling.
+
+\subsubsection{LCC Web Interface}
+The figure \ref{fig:ictlab-network} illustrates the current deployment of LCC web application inside the ICTLab Network. There are 2 main components working together to provide services for the end users. The first component is Flaskapp, a Python Flask backend to process all the requests and logics, running inside the a private server (ict5) and exposing port 8999 to the outer environment. The second one is the Frontend app sitting behind a Nginx web server. Frontend and Nginx web server are placed in a virtual machine inside the public server (frontend). These 2 components are communicating only via SSH connection, then Nginx web server connects the system to the end user via HTTP (port 80) or HTTPS (port 443).
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/ICTLab-network.pdf}
+    \caption{ICTLab Network overview}
+    \label{fig:ictlab-network}
+\end{figure}
+\par
+As it can be seen above, the current structure of LCC web application is problematic because it is separated in two different environments (one is inside ICT1 while the other is inside ICT5). The SSH connection between them is an acceptable solution, but it is surely not as good as the inner network connection if they are both placed in the same server. One more problem can be noticed is that this architecture slows down the application a lot since the data flows need to pass through multiple servers in ICTLab's network, and this leads to negative experience for the end users. \par
+On the developer side, the development process is also separated. For instance, if a developer wants to add a new feature to the Frontend component, he must connect to the ICTLab network, then uses SSH to go inside the LCC Virtual machine where the code is placed. Generally, these steps delay his development process and  decrease his work efficiency. \par
+Similarly to the Model Deployment part, Docker provides an excellent solution called Docker-Compose to eliminate the problems. Docker Compose solves this problem by allowing developers to use a YAML file to operate multi-container applications at once. The dev team can set one container for Frontend and one more container for Flaskapp, then with a single set of commands they can build, run and configure all the containers in the same environment.
+
+\subsection{Container-based Design}
+\label{sect:container-based-design}
+This section covers two new designs for the LCC application. First, the Model Deployment service can be containerized using Single-container pattern. This is an ideal solution since the model does not communicate with or depend on any outer services. This design can be achieved using a Dockerfile. Within a Dockerfile, one simply adds all instructions to set up the code repository and install the necessary packages and dependencies. Then he builds a Docker image, and ships it as the versioned artifact to remote hosts. The figure \ref{fig:set-up-new} shows the new process needed to setup a Model Deployment environment. Compared to the process in \ref{fig:current-strategy}, this method is faster and simpler.\par
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{Image-pdf/Testing-process-docker.pdf}
+    \caption{Set up a new testing model environment using Docker}
+    \label{fig:set-up-new}
+\end{figure}
+\par
+Second, the LCC web application contains two different components (Frontend and Flaskapp) interacting back-and-forth to serve user requests, therefore, it's best practice to have each of these in their respective container. So if one container is broken, it does not affect any processes in the second container. Moreover, this architecture makes the application more scalable since the developer can add more Frontend container to serve more requests.\par
+With Docker-Compose tool, a developer can define a multi-container application in one config file (called YAML) which can be spun up by a single command. Hence, he achieves a fully-functioned LCC web app in his working environment.
+
+\subsection{Implementation}
+\label{sect:implementation}
+This section presents an overview of Dockerfile and Docker-Compose, which are two tools in Docker Ecosystem. Then it explains how they are applied to achive the new design discussed in section \ref{sect:container-based-design}.
+
+\subsubsection{Model deployment in a Docker container}
+\label{sect:model-deployment}
+\paragraph{Dockerfile overview}
+A Dockerfile is a text file, composed of various commands (instructions) and arguments listed sequentially to perform actions on a base image in order to create a new one. For instance, in order to obtain a Python2.7 environment, one can choose a Ubuntu 16.04 base, then create one more instruction to install Python via apt-get (a package management in Debian Linux). \par
+A Dockerfile begins with defining an image FROM which the build process starts. Followed by various other commands and arguments (or conditions), in return, provide a new image which is used for creating docker containers. The table \ref{table:dockerfile-command} demonstrates some frequently-used commands in Dockerfile. Therefore, the example above can be implemented using two command in the Dockerfile:
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos
+]
+{docker}
+# Use Ubutu:16.04 as a base image
+FROM ubuntu:16.04
+
+# Install python 2.7
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python2.7 \
+    python-pip \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Check python 2.7 is installed correctly or not
+CMD ["python", "--version"]
+\end{minted}
+\par
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{A4C2F4} 
+\multicolumn{1}{|c|}{\cellcolor[HTML]{A4C2F4}\textbf{Command}} & \multicolumn{1}{c|}{\cellcolor[HTML]{A4C2F4}\textbf{Functionality}}                                                                                                    \\ \hline
+\textbf{FROM {[}base image{]}}                                 & \begin{tabular}[c]{@{}l@{}}Initializes a new build stage and sets the Base \\ Image for subsequent instructions.\end{tabular}                                          \\ \hline
+\textbf{WORKDIR {[}path{]}}                                    & Sets the working directory in the container.                                                                                                                           \\ \hline
+\textbf{COPY {[}source{]} {[}destination{]}}                   & \begin{tabular}[c]{@{}l@{}}Copies the files from the source on the host \\ into the container’s own filesystem at the \\ destination.\end{tabular}                     \\ \hline
+\textbf{RUN {[}command{]}}                                     & \begin{tabular}[c]{@{}l@{}}Executes the command in a new layer on top \\ of the current image and commits the results.\end{tabular}                                    \\ \hline
+\textbf{ENV {[}variable{]} {[}value{]}}                        & Sest the environment variable  to the value.                                                                                                                           \\ \hline
+\textbf{EXPOSE {[}port{]}}                                     & \begin{tabular}[c]{@{}l@{}}Associates a specified port to enable \\ networking between the running process \\ inside the container and the outside world.\end{tabular} \\ \hline
+\textbf{VOLUME {[}source{]} {[}destination{]}}                 & \begin{tabular}[c]{@{}l@{}}Enables access from your container to a \\ directory on the host machine (mounting it).\end{tabular}                                        \\ \hline
+\textbf{CMD {[}command{]} {[}option1{]} {[}option2{]} ...}     & \begin{tabular}[c]{@{}l@{}}Defines the command to run the app. One \\ Dockerfiles contains only 1 CMD instruction.\end{tabular}                                        \\ \hline
+\end{tabular}%
+}
+\caption{Docker frequently used commands}
+\label{table:dockerfile-command}
+\end{table}
+\par
+
+\paragraph{Dockerfile implementation}
+The Model Deployment encapsulation can be expanded from the example in the previous subsection. However, it requires more steps since the goal of this Dockerfile is to achieve a complete machine learning environment. The figure \ref{fig:dockerfile-model-deployment} clarifies all instructions needed to be declared in the Dockerfile.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/Testing-process-dockerfile.pdf}
+    \caption{Dockerfile instruction of Model Deployment service}
+    \label{fig:dockerfile-model-deployment}
+\end{figure}
+\par
+First, the working environment is initialized using the official Python 3.7 base, which already contains a Python runtime on Debian Linux OS. Second, in order to ensure the Python environment is up-to-date, two “RUN” commands are used to update and install Python essential libraries (for example, build-essential and pip). Next, Docker sets the default working directory to “/app” then installs all necessary dependencies for the project using the package manager file called “requirements.txt”. Finally, a default command is set by the command CMD. When a new container starts, this command will execute by Python with one argument “test\_mode.py”.
+\par
+The Dockerfile used to encapsulate the Model Deployment service is shown below.
+\label{file:model-deployment-file}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos
+]
+{docker}
+# Use a pre-installed Python on Debian image as the base image
+FROM python:3.7-slim-buster
+
+# Install essential python libraries
+RUN apt-get update -y \
+    && apt-get install build-essential libglib2.0-0 libsm6 libxext6 libxrender-dev -y \
+    && apt-get autoremove
+
+# Upgrade pip to the latest version
+RUN pip install --upgrade pip
+
+# Set the working directory to '/app'
+WORKDIR /app
+
+# Install dependencies for the project
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy entire source code to '/app'
+COPY . . 
+
+# Set default container command
+CMD ["python", "test_model.py"]
+\end{minted}
+
+% 3.3.2
+\subsubsection{LCC Web Application}
+\paragraph{Docker-Compose overview}
+When working in a more complex application, LCC web application in this case, Docker provides a favourable solution called Docker-Compose. Docker-Compose allows developers to define, run and manage multiple-container environments. \par
+Docker-compose works by applying many rules declared within a single docker-compose.yml configuration file. This YAML (YAML Ain’t Markup Language) file, both human-readable and machine-optimized, presents an effective way to create containers, expose ports, binding volumes and connect to other containers. In short, docker-compose.yml file takes the snapshot of the entire project.
+\paragraph{Docker-Compose implementation}
+While the Testing Detection Model service contains only a single component running the whole time, the LCC Web Interface consists of two components which are Frontend and Flaskapp communicating continuously. The figure \ref{fig:lcc-container-based-design} indicates a new containerized-based design for this application.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/LCC-Container.pdf}
+    \caption{Container-based design of LCC Web Application}
+    \label{fig:lcc-container-based-design}
+\end{figure}
+\par
+In short, there are 2 main containers connecting with each other via Nginx web server. The Frontend container serves the static contents while the FlaskApp container processes all the logics and requests from the first container. This architecture can be implemented as the docker-compose.yml file below.
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos
+]
+{docker}
+version: "3.7"
+
+services:
+  flaskapp:
+    build: ./flaskapp
+    container_name: flaskapp
+    image: phuongminh2303/lcc-flaskapp
+    expose:
+      - "5000"
+    environment:
+      - K_1=./K_1/
+      - K_2=./K_2/
+    volumes:
+      - ./flaskapp:/app/
+      - ./K_1:/app/K_1/
+      - ./K_2:/app/K_2/
+      - ./models:/app/models/
+    restart: unless-stopped
+
+  lcc-frontend:
+    container_name: lcc-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: phuongminh2303/lcc-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      CERTBOT_EMAIL: phuongdnm.b8141@st.usth.edu.vn
+    volumes:
+      - ./frontend/nginx:/etc/nginx/user.conf.d:ro
+      - ./frontend:/usr/share/nginx/html/
+      - letsencrypt:/etc/letsencrypt
+    restart: unless-stopped
+\end{minted}
+\label{file:lcc-web-file}
+
+\subsection{Deployment}
+At the moment, the thesis has described the containerizing process of the two services in the Lung Cancer Care project which are the Model Deployment and the LCC web application. This subsection represents the deployment process - the last part of every software project. The summary of the final deployment is conclude in the figure \ref{fig:deployment-process-lcc}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/LCC-Deployment.pdf}
+    \caption{Deployment process of LCC project using Docker}
+    \label{fig:deployment-process-lcc}
+\end{figure}
+\par
+\begin{enumerate}
+    \item Set up Docker config files: this process has been discussed in section \ref{sect:implementation}.
+    \item Docker image creation: the "docker build" command is used to build a new image from config file. The command below will build an image with specific name "phuongdnm/testmodel:v1"
+    \begin{minted}{shell}
+    $ docker build -t phuongdnm/testmodel:v1 .
+    \end{minted}
+    \item Push Docker image to public registry (in this case, Docker Hub is mentioned)
+    \begin{minted}{shell}
+    $ docker push phuongdnm/testmodel:v1
+    \end{minted}
+    \item Execute the image in production server
+    \begin{minted}{shell}
+    $ docker run phuongdnm/testmodel:v1
+    \end{minted}
+\end{enumerate}
+\biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
+\end{document}

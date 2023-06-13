@@ -1,0 +1,19 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+\subsection{Conclusion}
+Because of the scaling requirement in the future, more effective visualization methods are needed for the Lung Cancer Care project. In this thesis, containerization architecture was introduced and proposed to be one excellent solution for the problem. This technology was compared to the traditional virtualization and their pros and cons were discussed as well. Also, the thesis introduced a brief overview of Docker, which is the most popular containering platform in the market.
+\par
+Benefits of containerization are undeniable, especially in the deployment phase of software development life cycle. In the traditional virtualization approach, even a small update to some service requires compiling of a new virtual machine image. As a result, the deployment process of a large virtual machine contains several issues and the startup time can last minutes. On the other hand, containers take seconds to start so that they boost up the deployment process. 
+\par
+In this thesis, we examined the implementation of the Lung Cancer Care project using container-based technology. This design was carried out by a practical proof-of-concept, where two main components (Frontend and Flaskapp) of the existing LCC application were moved into containers. Next, the practical implementation was evaluated in terms of resource utilization, image build time and storage size on the disk. From the result, we concluded that there is no difference in resource usage, such as CPU and Memory,  between an application running inside a container and non-container environment. Compared to the current virtualization architecture, the new container-based architecture performs significantly in terms of startup time, storage size and deployment steps.
+
+\subsection{Future Work}
+In the implementation and testing process, the GCP server does not contain any cloud GPUs since the quota limitation of the free Google Cloud account. This leads to a significant drop in performance since some machine learning algorithms and libraries, such as tensorflow, require GPU acceleration from the host machine. The next step towards fully containerizing the LCC project would be to set up CUDA toolkit to enable GPU support. 
+\par
+This present study has only examined the official Python:3.7-slim-buster image as the base image for the Flaskapp. Some lightweight alternatives, such as python:busybox and python:alpine, could be used in order to obtain smaller images. Using these lighter images meets some challenges in library support, for instance the tensorflow and keras dependencies can not be installed by using package manager in those base images. Hence, the Dockerfile configuration might become complicated. However, it should be researched to provide a lighter docker image for scaling purposes later.
+\par
+Finally, a considerable topic that was not discussed in this thesis is container security. Since containers share the host kernel with each other, some additional security risks might exist. These dangers are often related to shared directories or kernel capabilities between the containers and the host machine. Due to this reason, the container security needs more analysis.
+
+
+\biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
+\end{document}

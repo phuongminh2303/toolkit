@@ -1,0 +1,48 @@
+Rc files read:
+  NONE
+Latexmk: This is Latexmk, John Collins, 4 Apr. 2023. Version 4.80.
+Latexmk: Changing directory to '/var/lib/sharelatex/data/compiles/64834b16cfba6dd3ca0b0250-64813b863c4e8723d2544c92/'
+Latexmk: applying rule 'xelatex'...
+Rule 'xelatex':  Reasons for rerun
+Category 'no_dest':
+  xelatex
+
+------------
+Run number 1 of rule 'xelatex'
+------------
+------------
+Running 'xelatex -no-pdf -synctex=1 -interaction=batchmode -recorder --jobname="output"  "main.tex"'
+------------
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+
+SyncTeX written on output.synctex.gz.Latexmk: Getting log file 'output.log'
+Latexmk: Examining 'output.fls'
+Latexmk: Examining 'output.log'
+Latexmk: Found input bbl file 'output.bbl'
+Latexmk: Found input bbl file 'output.bbl'
+Latexmk: Log file says output to 'output.xdv'
+Latexmk: Found bibliography file(s):
+  ./refs.bib
+Latexmk: applying rule 'xdvipdfmx'...
+Rule 'xdvipdfmx':  Reasons for rerun
+Changed files or newly in use/created:
+  output.xdv
+Category 'changed_source_rules':
+  xelatex
+Category 'no_dest':
+  xdvipdfmx
+
+------------
+Run number 1 of rule 'xdvipdfmx'
+------------
+------------
+Running 'xdvipdfmx -E -o "output.pdf"  "output.xdv"'
+------------
+Latexmk: Summary of warnings from last run of *latex:
+  =====Latex reported missing or unavailable character(s).
+=====See log file for details.
+Latexmk: All targets (output.pdf) are up-to-date
+Latexmk: Undoing directory change
+

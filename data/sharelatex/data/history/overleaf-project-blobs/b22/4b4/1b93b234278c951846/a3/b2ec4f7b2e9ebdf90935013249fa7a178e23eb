@@ -1,0 +1,13 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+
+\vspace*{2\baselineskip}
+
+This thesis was conducted in ICT Department and ICTLab, USTH. I would like to thank my research supervisor, Dr. Tran Giang Son for giving me the opportunity to work with this interesting topic. It was an honor to work with you and your team. I have learned a lot during my internship.
+\par
+In addition, I would like to thank Mr. Nguyen Chi Cuong, a USTH ICT PhD student, for his technical support and guidance in the internship. I should also like to thank my family for encouraging me and all my friends in ICT Department and ICTLab for making the past three months unforgettable.
+
+
+\vspace*{3\baselineskip}
+
+\end{document}

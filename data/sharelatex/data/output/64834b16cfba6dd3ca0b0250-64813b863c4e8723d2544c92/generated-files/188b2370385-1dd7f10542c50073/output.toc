@@ -1,0 +1,58 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{DANH MỤC BẢNG BIỂU}{iv}{chapter*.4}%
+\contentsline {chapter}{DANH MỤC HÌNH ẢNH}{v}{chapter*.5}%
+\contentsline {chapter}{ĐẶT VẤN ĐỀ}{1}{chapter*.5}%
+\contentsline {chapter}{\numberline {1}TỔNG QUAN}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Màu sắc răng}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Màu sắc răng tự nhiên}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Các thành phần chi phối màu sắc}{3}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Các yếu tố ảnh hưởng đến so màu trong nha khoa}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Ánh sáng}{4}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Sự xung đột ánh sáng trong không gian so màu}{4}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Hiệu ứng tương phản đồng thời trong so màu nha khoa}{5}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Hiệu ứng tương phản vùng khi so màu nha khoa}{7}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Hiệu ứng không gian khi so màu nha khoa}{8}{subsection.1.2.5}%
+\contentsline {subsection}{\numberline {1.2.6}Hiệu ứng tương phản dư ảnh khi so màu nha khoa}{8}{subsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.2.7}Nhận thức màu kém}{8}{subsection.1.2.7}%
+\contentsline {subsection}{\numberline {1.2.8}Tuổi}{8}{subsection.1.2.8}%
+\contentsline {subsection}{\numberline {1.2.9}Sức khoẻ thể chất của người quan sát}{9}{subsection.1.2.9}%
+\contentsline {subsection}{\numberline {1.2.10}Sự thích nghi ánh sáng và bóng tối của người quan sát}{10}{subsection.1.2.10}%
+\contentsline {subsection}{\numberline {1.2.11}Dinh dưỡng}{10}{subsection.1.2.11}%
+\contentsline {subsection}{\numberline {1.2.12}Cảm xúc}{10}{subsection.1.2.12}%
+\contentsline {subsection}{\numberline {1.2.13}Rối loạn nhận thức màu do thuốc}{10}{subsection.1.2.13}%
+\contentsline {subsection}{\numberline {1.2.14}Sự khác biệt giữa hai mắt người quan sát}{10}{subsection.1.2.14}%
+\contentsline {subsection}{\numberline {1.2.15}Các đặc tính quang học của men và ngà}{11}{subsection.1.2.15}%
+\contentsline {section}{\numberline {1.3}Bảng so màu Vita 3D Master}{11}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Các nguyên tắc khi so màu}{12}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Các phương pháp so màu}{13}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Chỉ số nhu cầu điều trị làm trắng răng}{13}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Các nghiên cứu trên thế giới và Việt Nam về màu sắc răng và nhu cầu làm trắng răng}{16}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}Trên thế giới}{16}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Ở Việt Nam}{17}{subsection.1.7.2}%
+\contentsline {chapter}{\numberline {2}ĐỐI TƯỢNG VÀ PHƯƠNG PHÁP NGHIÊN CỨU}{19}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Địa điểm và thời gian nghiên cứu}{19}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Đối tượng nghiên cứu}{19}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Tiêu chuẩn lựa chọn đối tượng nghiên cứu:}{19}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Tiêu chuẩn loại trừ:}{19}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Phương pháp nghiên cứu}{19}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Phương pháp chọn mẫu}{19}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Quy trình tiến hành nghiên cứu}{20}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Vật liệu và công cụ thu thập thông tin}{20}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Lập phiếu thu thập thông tin}{21}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Khám lâm sàng}{21}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6} Biến số, chỉ số nghiên cứu}{23}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Đánh giá chỉ số nhu cầu làm trắng răng}{23}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Thu thập dữ liệu}{24}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Đạo đức nghiên cứu}{25}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Sai số và biện pháp tránh sai số}{25}{section.2.10}%
+\contentsline {chapter}{\numberline {3}KẾT QUẢ NGHIÊN CỨU}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Đặc điểm màu răng theo bảng Vita 3D ở sinh viên trường Đại học Y Dược - Đại học Quốc Gia Hà Nội năm 2023.}{27}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Xác định nhu cầu điều trị ở nhóm đối tượng trên}{33}{section.3.2}%
+\contentsline {chapter}{\numberline {4}BÀN LUẬN}{39}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Đặc điểm màu sắc răng theo bảng màu Vita 3D Master}{39}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Đánh giá nhu cầu làm trắng răng}{41}{section.4.2}%
+\contentsline {chapter}{KẾT LUẬN}{45}{chapter*.22}%
+\contentsline {chapter}{KIẾN NGHỊ}{45}{chapter*.22}%
+\contentsline {chapter}{TÀI LIỆU THAM KHẢO}{}{chapter*.23}%
+\setcounter {tocdepth}{-1}
+\contentsline {chapter}{PHỤ LỤC}{}{chapter*.23}%

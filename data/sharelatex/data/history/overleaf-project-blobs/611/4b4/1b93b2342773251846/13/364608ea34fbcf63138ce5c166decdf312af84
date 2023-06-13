@@ -1,0 +1,69 @@
+%!TEX TS-program = xelatex
+\documentclass[en]{uet-awesome-thesis} % use [vi] for vietnamese
+
+\usepackage{blindtext}
+
+\title{Đặc điểm màu răng theo bảng màu VITA 3D Master\\ và xác định nhu cầu làm trắng răng ở sinh viên \\trường đại học y dược - đại học quốc gia hà nội }
+\author{Nguyễn Thu Trà}
+\major{Công Nghệ Thông Tin}
+\advisor{PGS.TS. Phạm Như Hải}
+\university{Đại học Quốc gia Hà Nội}
+\universitycity{Hà Nội}
+\degreeyear{2023}
+
+\input{frontmatter/glossaries}
+\makeglossaries 
+
+\begin{document}
+
+\input{frontmatter/coverpage}
+
+\input{frontmatter/thanks}
+\pagenumbering{roman}
+
+% \glsaddall
+\printglossary[type=\acronymtype,title=DANH MỤC KÝ HIỆU VIẾT TẮT, toctitle=DANH MỤC KÝ HIỆU VIẾT TẮT]
+
+\tableofcontents
+
+\listoftables
+\addcontentsline{toc}{chapter}{DANH MỤC BẢNG BIỂU}
+\listoffigures
+\addcontentsline{toc}{chapter}{DANH MỤC HÌNH ẢNH}
+
+
+\newpage
+\pagenumbering{arabic}
+
+\addcontentsline{toc}{chapter}{ĐẶT VẤN ĐỀ}
+\input{frontmatter/abstract}
+
+\input{chapters/chapter1}
+\input{chapters/chapter2}
+\input{chapters/chapter3}
+\input{chapters/chapter4}
+\input{chapters/chapter5}
+\input{chapters/khuyennghi}
+
+\addcontentsline{toc}{chapter}{KẾT LUẬN}
+\addcontentsline{toc}{chapter}{KIẾN NGHỊ}
+\singlespacing
+
+\clearpage
+\renewcommand{\thepage}{}
+\bibliography{refs}
+\addcontentsline{toc}{chapter}{TÀI LIỆU THAM KHẢO}
+\bibliographystyle{plainnat}
+
+\newpage
+\begin{appendices}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+\addcontentsline{toc}{chapter}{PHỤ LỤC}
+\input{chapters/appendix}
+\input{chapters/appendix1}
+\input{chapters/appendixA}
+\input{chapters/appendixB}
+\input{chapters/danh-sach-sv-tham-gia}
+\end{appendices}
+
+\end{document}

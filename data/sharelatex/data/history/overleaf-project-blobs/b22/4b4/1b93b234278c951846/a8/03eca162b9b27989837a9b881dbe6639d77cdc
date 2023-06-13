@@ -1,0 +1,131 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+The chapter illustrates the experiments and results of container-base architecture of the Lung Cancer Care project. In order to achieve a precise result, a Google Cloud virtual machine is used to implement and test the container performances. The first section describes the specs of this virtual machine and introduces some Docker shell commands used to collect the data. Next, the following section evaluates results in terms of resource consumption and performance, then compare these results to native method and virtualization method.  
+
+\subsection{Evaluation setup}
+First, a Google Cloud virtual machine is initialized in order to evaluate the Docker config and Docker image performance. The table \ref{table:gcp-specs} specifies the specs of this virtual machine.
+\begin{table}[h]
+\centering
+\begin{tabular}{|>{\columncolor[HTML]{A4C2F4}}c |c|}
+\hline
+\cellcolor[HTML]{A4C2F4}\textbf{Machine type} & N1-highcpu-16            \\ \hline
+\textbf{CPU}                                  & 16vCPU Skylake           \\ \hline
+\textbf{RAM}                                  & 14.4GB                   \\ \hline
+\textbf{Disk}                                 & 40GB SSD persistent disk \\ \hline
+\textbf{GPU}                                  & None                     \\ \hline
+\textbf{OS}                                   & Ubuntu:16.04 Xenial      \\ \hline
+\textbf{Docker version}                       & v19.03.11                \\ \hline
+\textbf{Docker-compose version}               & v1.25.5                  \\ \hline
+\end{tabular}
+\caption{The specs of GCP instance}
+\label{table:gcp-specs}
+\end{table}
+\par
+Second, Docker provides some built-in command to measure the build time and size of a new image which are listed below.
+\begin{minted}{shell}
+    $ time docker build phuongdnm/testmodel:v1 .
+    $ docker images
+\end{minted}
+\par
+Last but not lease, in order to monitor the resource utilization of a running container in real time, a open-source tool called cAdvisor is set up. cAdvisor, which stands for container advisor, provides developers an understanding of the resource usage and performance characteristics of their running containers in real-time. In this project, there are two main factors to focus on which are CPU and Memory usage. 
+
+\subsection{Evaluating results}
+
+\subsubsection{Resource consumption}
+It is important to keep track of storage consumption of the Docker image since they will be deployed on the ICTLab server. As it is discussed in section \ref{sect:model-deployment}, Docker image consists of multiple layers, where each layer is created by executing a command inside Dockerfile then placed on top of the previous layer. The figure \ref{fig:docker-image-formation} displays a visual representation of this methodology.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\columnwidth]{Image-pdf/Image-visualize.pdf}
+    \caption{Docker image formation}
+    \label{fig:docker-image-formation}
+\end{figure}
+\par
+And the table \ref{table:model-image-stats} breaks down this process in steps then presents execution times and storage size of each layer:
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|l|c|c|l|}
+\hline
+\rowcolor[HTML]{A4C2F4} 
+\textbf{Step}                      & \multicolumn{1}{c|}{\cellcolor[HTML]{A4C2F4}\textbf{Instruction}} & \textbf{\begin{tabular}[c]{@{}c@{}}Execution \\ time (s)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Image \\ size\end{tabular}} & \multicolumn{1}{c|}{\cellcolor[HTML]{A4C2F4}\textbf{Note}}                                                 \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{1} & Initialize the base image                                         & 0                                                                      & 155 MB                                                         &                                                                                                            \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{2} & Install/Update python libraries                                   & 30                                                                     & 437 MB                                                         & \begin{tabular}[c]{@{}l@{}}build-essential, libglib2.0-0, libsm6, \\ libxext6, libxrender-dev\end{tabular} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{3} & Upgrade pip                                                       & 4                                                                      & 442 MB                                                         & from v8.9 to v20.11                                                                                        \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{4} & Set the default working directory                                 & 0                                                                      & 442 MB                                                         &                                                                                                            \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{5} & Copy the requirements.txt file                                    & 0                                                                      & 442 MB                                                         &                                                                                                            \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{6} & Install dependencies of the project                               & 97                                                                     & 1.18 GB                                                        & \begin{tabular}[c]{@{}l@{}}tensorflow and keras are the 2\\  largest libraries\end{tabular}                \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{7} & Copy source code to image                                         & 38                                                                     & 1.65 GB                                                        & the trained model file takes 451 MB                                                                        \\ \hline
+\cellcolor[HTML]{C0C0C0}8          & Set default container command                                     & 0                                                                      & 1.65 GB                                                        &                                                                                                            \\ \hline
+\multicolumn{2}{|c|}{Total}                                                                            & 169                                                                    & 1.65 GB                                                        &                                                                                                            \\ \hline
+\end{tabular}%
+}
+\caption{Model Deployment image formation stats}
+\label{table:model-image-stats}
+\end{table}
+\par
+In conclusion, it takes 169 seconds to build the Test Detection Model image from the Dockerfile implemented in section \ref{file:model-deployment-file}. The final image is 1.65 GB space on disk. 
+
+\subsubsection{Performance}
+Next, cAdvisor analyzes the CPU and Memory usage of the container created by the image built in the previous part. The figures \ref{fig:average-cpu} and \ref{fig:average-memory} describes those data during the time the container is running.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/cpu-usage2.pdf}
+    \caption{Average CPU usage of Model Deployment container}
+    \label{fig:average-cpu}
+\end{figure}
+\par
+All sixteen cores in the Google Cloud instance perform similarly at 87.5 \%, so the overall CPU usage can be concluded at this number.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/memory-usage2.pdf}
+    \caption{Average Memory usage of Model Deployment container}
+    \label{fig:average-memory}
+\end{figure}
+\par
+As it can be seen in the two figures, the processes running inside the container consumes approximately 87.5\% CPU usage. In terms of Memory usage, this architecture takes 2.66GB RAM minimum and 3.1GB RAM maximum. The figure \ref{fig:container-native-compare} represents the comparison between container-based and native approach.  
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{Image-pdf/Container-based and Non-container method comparison.pdf}
+    \caption{ Resource utilizing comparison between container-based method and native (non-container) method}
+    \label{fig:container-native-compare}
+\end{figure}
+\par
+Compared to the native method (run the script directly in the environment), Docker container performs a slightly worse performance and resource utilization, but the difference is tiny. In general, we can conclude that container-based system gives the same performance as the system without containers. 
+\par
+In the LCC Web Application, setting up a new environment is even easier and faster with the help of docker-compose.yml file (discussed in section \ref{file:lcc-web-file}). The only command required to completely achieve the application is:
+\begin{minted}{shell}
+    $ docker-compose up           # to run the system
+    $ docker-compose up --build   # build image before run
+\end{minted}
+\par
+In order to check the size of containers, Docker provides these commands:
+\begin{minted}{shell}
+    $ docker ps --size          # to check size of running containers
+    $ docker ps  -a --size      # to check size of all containers
+\end{minted}
+\par
+The table \ref{table:storage-size-comparison} lists the storage sizes of Frontend container, Flaskapp container and the Frontend virtual machine which is currently deployed in the ICTLab's network. Surprisingly, those container sizes are smaller than 1MB, while the virtual machine takes 3.8GB disk space. The test reveals that containers are much lighter than the virtual machine since they do not require the overhead of associating an operating system within each application.
+\begin{table}[H]
+\centering
+\resizebox{0.5\textwidth}{!}{%
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor[HTML]{A4C2F4} 
+\textbf{Object}                                                               & \textbf{Storage size} \\ \hline
+Frontend container                                                            & 5.54 KB               \\ \hline
+Flaskapp container                                                            & 225 KB                \\ \hline
+\begin{tabular}[c]{@{}c@{}}Frontend virtual machine \\ (on ICT1)\end{tabular} & 3.8 GB                \\ \hline
+\end{tabular}%
+}
+\caption{Storage size comparison between containers and virtual machine}
+\label{table:storage-size-comparison}
+\end{table}
+In conclusion, compared to the current deployment using virtual machine and SSH connection, this method saves a significant amount of time and effort for the developers. In the architecture point of view, the Docker-compose deployment is simpler, more stable and straight-forward since all the components directly connect and communicate with each other. Moreover, they are easier to maintain and replace if any errors occur.
+
+
+\subsection{Discussion}
+In this chapter, evaluation of the work has been done for the practical implementation proposed in the chapter 3. First, the chapter declared the hardware and software setup for the evaluating operation. In order to obtain a general environment, the entire LCC application was placed in a Ubuntu OS virtual machine provided by Google Cloud Platform. The result confirmed that there is no resource utilizing difference between containerization and non-container approaches. However, in comparison with virtualization design, the LCC containers system achieves a faster deployment process and a lower space on disk while their running performances are about the same. This result further reinforces the usefulness of containerization technology as an option for deploying not only the LCC project but also other applications.
+
+\biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
+\end{document}
+

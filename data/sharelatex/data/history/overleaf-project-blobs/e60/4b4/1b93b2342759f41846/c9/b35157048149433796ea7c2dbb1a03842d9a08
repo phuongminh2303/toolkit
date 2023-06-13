@@ -1,0 +1,157 @@
+\chapter*{PHỤ LỤC 1: BỘ CÂU HỎI KHẢO SÁT}
+\vspace{5pt}
+\begin{flushright}
+    \textbf{Mã số:}\hspace{2cm} \par
+\end{flushright}
+\vspace{12pt}
+\section*{Thông tin cá nhân}
+
+\begin{itemize}
+    \item Họ và tên:
+    \item Tuổi:
+    \item Giới tính: Nam/Nữ
+    \item Lớp:
+    \item Địa chỉ: 
+    \item Liên hệ:
+\end{itemize}
+\vspace{12pt}
+\section*{Câu hỏi}
+
+\textbf{Bạn có tự tin vào màu sắc hàm răng của mình không?}
+\begin{enumerate}
+    \item Rất mất tự tin
+    \item Mất tự tin
+    \item Mất tự tin một chút
+    \item Không mất tự tin chút nào
+    \item Hoàn toàn tự tin là rất đẹp
+\end{enumerate}
+
+\noindent
+\textbf{Bạn muốn hàm răng mình được trắng hơn đến mức nào?}
+\begin{enumerate}
+    \item Rất muốn được trắng hơn
+    \item Muốn răng được trắng hơn
+    \item Thấy răng có nhiễm màu và muốn các răng đó sáng hơn
+    \item Nếu những răng nhiễm màu sáng hơn thì tốt
+    \item Thấy có răng nhiễm màu nhưng không quan tâm, đợi làm trắng răng sau
+\end{enumerate}
+  
+\noindent
+\textbf{Bạn có tiền sử sử dụng kháng sinh Tetracycline không?}
+\par
+\vspace{5pt}
+\begin{enumerate*}[start=0, itemjoin={\hspace{5cm}}]
+    \setcounter{enumi}{-1}
+    \item Không
+    \item Có
+\end{enumerate*}
+\vspace{5pt}
+\par
+\noindent
+\textbf{Bạn có tiền sử bị chấn thương răng không?}
+\par
+\vspace{5pt}
+\begin{enumerate*}[start=0, itemjoin={\hspace{5cm}}]
+    \setcounter{enumi}{-1}
+    \item Không
+    \item Có
+\end{enumerate*}
+\vspace{5pt}
+\par
+\noindent
+\textbf{Bạn đã từng sử dụng thuốc tẩy trắng chưa?}
+\par
+\vspace{5pt}
+\begin{enumerate*}[start=0, itemjoin={\hspace{5cm}}]
+    \setcounter{enumi}{-1}
+    \item Không
+    \item Có
+\end{enumerate*}
+\vspace{5pt}
+\par
+\noindent
+\textbf{Bạn có đã hoặc đang hút thuốc lá không?}
+\par
+\vspace{5pt}
+\begin{enumerate*}[start=0, itemjoin={\hspace{5cm}}]
+    \setcounter{enumi}{-1}
+    \item Không
+    \item Có
+\end{enumerate*}
+\vspace{5pt}
+\par
+\noindent
+\textbf{Bạn hiện tại có đang sử dụng đồ uống có màu không?}
+\begin{itemize}
+    \item Cafe:
+    \begin{enumerate*}
+        \setcounter{enumi}{-1}
+        \item Không
+        \item Có
+    \end{enumerate*}
+    \item Nước chè:
+    \begin{enumerate*}[start=0]
+        \item Không
+        \item Có
+    \end{enumerate*}
+    \item Coca cola:
+    \begin{enumerate*}[start=0]
+        \item Không
+        \item Có
+    \end{enumerate*}
+    \item Các loại đồ uống có màu sẫm khác:
+    \begin{enumerate*}[start=0]
+        \item Không
+        \item Có
+    \end{enumerate*}
+\end{itemize}
+
+\par
+\noindent
+\textbf{Bạn vệ sinh răng miệng bao nhiêu lần trong ngày?}
+\par
+\vspace{5pt}
+\begin{enumerate*}[start=0, itemjoin={\hspace{3cm}}]
+    \setcounter{enumi}{-1}
+    \item 1 lần/ngày
+    \item 2 lần/ngày
+    \item trên 2 lần/ngày
+\end{enumerate*}
+\vspace{5pt}
+\par
+\noindent
+\textbf{Bạn có sử dụng nước súc miệng có màu sẫm sau khi vệ sinh răng không?}
+\par
+\vspace{5pt}
+\begin{enumerate*}[start=0, itemjoin={\hspace{5cm}}]
+    \setcounter{enumi}{-1}
+    \item Không
+    \item Có
+\end{enumerate*}
+\vspace{5pt}
+\par
+\noindent
+\textbf{Bạn có thường xuyên đi lấy cao răng định kỳ không?}
+\begin{enumerate}[start=0, itemjoin={\hspace{5cm}}]
+    \setcounter{enumi}{-1}
+    \item Chưa bao giờ lấy cao răng
+    \item Lấy cao răng 3 tháng 1 lần
+    \item Lấy cao răng 6 tháng 1 lần
+    \item Trên 1 năm đi lấy cao răng 1 lần 
+\end{enumerate}
+
+\par
+\noindent
+\textbf{Bạn mong muốn làm trắng răng đến màu sắc nào? (kèm bảng màu Vita)}
+\begin{enumerate}[start=0]
+    \setcounter{enumi}{-1}
+    \item Màu khác
+    \item 2M3
+    \item 2M2
+    \item 2M1
+    \item 1M2
+    \item 1M1
+    \item 0M3
+    \item 0M2
+    \item 0M1
+\end{enumerate}

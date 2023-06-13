@@ -1,0 +1,39 @@
+\renewcommand{\glsmcols}{2}
+\setglossarystyle{mcolindex}
+\vspace{2.5cm}
+
+\newacronym{a*}{a*}{Green - red axis (a*) (Trục đỏ - xanh lá cây)}
+\newacronym{b*}{b*}{Blue - yellow axis (b*) (Trục vàng - xanh da trời)}
+\newacronym{L}{L}{Colorless black - white axis (L) (Trục sáng - tối)}
+\newacronym{R}{R}{Răng}
+\newacronym{RHN}{RHN}{Răng hàm nhỏ}
+
+
+
+\newglossary[nlg]{notation}{not}{ntn}{Notation}
+
+\newglossaryentry{not:eth}{
+    name=\ensuremath{\tilde{E}_{td}},
+    description={energy requesting threshold},
+    type=notation}
+    
+\newglossaryentry{not:bs}{
+    name=\ensuremath{p_0},
+    description={base station},
+    type=notation}
+    
+\newglossaryentry{not:snset}{
+    name=\ensuremath{\mathcal{P}},
+    description={a set of deployed sensors},
+    type=notation}
+
+\newglossaryentry{not:num:sn}{
+    name=\ensuremath{n},
+    description={number of deployed sensors},
+    type=notation}
+    
+\newglossaryentry{not:sn}{
+    name=\ensuremath{p},
+    description={a sensor},
+    type=notation}
+    

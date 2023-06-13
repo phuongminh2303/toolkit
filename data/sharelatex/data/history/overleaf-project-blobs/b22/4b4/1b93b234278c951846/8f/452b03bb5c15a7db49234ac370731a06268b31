@@ -1,0 +1,40 @@
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+
+\center
+
+\textsc{\Large University of Science and Technology of Hanoi}\\[0.5cm]
+\textsc{\LARGE \bfseries ICT Department }\\[1.5cm]
+
+\includegraphics{Images/lolo.png}\\[1.5cm] 
+
+\textsc{\LARGE \bfseries Bachelor Thesis}\\[0.5cm]
+
+% Project name
+\HRule \\[0.4cm]
+{ \huge \bfseries Containerization of Lung Nodule Detection}\\[0.4cm] 
+\HRule \\[1.5cm]
+ 
+% Author
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Student:}\\
+Dinh Nhu Minh Phuong
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Dr. Tran Giang Son
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% Date
+{\large Hanoi, August 2020}\\[2cm]
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}

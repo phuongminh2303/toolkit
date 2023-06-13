@@ -1,0 +1,94 @@
+\usepackage[utf8]{inputenc}
+\begin{thebibliography}{99}
+
+@article{GLOBOCAN,
+    title={Global cancer statistics 2018: GLOBOCAN estimates of incidence and mortality worldwide for 36 cancers in 185 countries},
+    author={Bray, Freddie and Ferlay, Jacques and Soerjomataram, Isabelle and Siegel, Rebecca L. and Torre, Lindsey A. and Jemal, Ahmedin},
+    journal = {CA: A Cancer Journal for Clinicians},
+    volume = {68},
+    number = {6},
+    pages = {394-424},
+    year={2018},
+    url = {https://acsjournals.onlinelibrary.wiley.com/doi/abs/10.3322/caac.21492}
+}
+
+@book{Hypervisor-vs-Lightweight,
+    author={R. {Morabito} and J. {Kjällman} and M. {Komu}},
+    booktitle={2015 IEEE International Conference on Cloud Engineering}, 
+    title={Hypervisors vs. Lightweight Virtualization: A Performance Comparison}, 
+    year={2015},
+    volume={},
+    number={},
+    pages={386-393}
+}
+
+@book{Virtualization-issues,
+    author={J. {Sahoo} and S. {Mohapatra} and R. {Lath}},
+    booktitle={2010 Second International Conference on Computer and Network Technology}, 
+    title={Virtualization: A Survey on Concepts, Taxonomy and Associated Security Issues}, 
+    year={2010},
+    volume={},
+    number={},
+    pages={222-226}
+}
+
+@book{VM-Startup-Time,
+    author={M. {Mao} and M. {Humphrey}},
+    booktitle={2012 IEEE Fifth International Conference on Cloud Computing}, 
+    title={A Performance Study on the VM Startup Time in the Cloud}, 
+    year={2012},
+    volume={},
+    number={},
+    pages={423-430},
+}
+
+@book{Virtualization-types,
+    author={Robert P. Goldberg},
+    booktitle={2010 Second International Conference on Computer and Network Technology}, 
+    title={Architectural principles for virtual computer systems}, 
+    year={1973},
+    publisher={Harvard University},
+    volume={},
+    number={},
+    pages={222-226}
+}
+
+@book{container-intro,
+    author={David Bernstein},
+    booktitle={2010 Second International Conference on Computer and Network Technology}, 
+    title={Containers and cloud: From lxc to docker to kubernetes}, 
+    year={2013},
+    publisher={IEEE Cloud Computing 1.3},
+    volume={},
+    number={},
+    pages={81--84}
+}
+
+@book{ISLR,
+  title={Containers and cloud: From lxc to docker to kubernetes},
+  author={James, Gareth and Witten, Daniela and Hastie, Trevor and Tibshirani, Robert},
+  volume={112},
+  year={2014},
+  publisher={IEEE Cloud Computing 1.3}
+}
+
+@article{greenacre1984,
+  title={Theory and applications of correspondence analysis},
+  author={Greenacre, Michael J},
+  year={1984},
+  publisher={London (UK) Academic Press}
+}
+
+@article{pearson1931test,
+  title={The test of significance for the correlation coefficient},
+  author={Pearson, Egon S},
+  journal={Journal of the American Statistical Association},
+  volume={26},
+  number={174},
+  pages={128--134},
+  year={1931},
+  publisher={Taylor \& Francis}
+}
+
+
+\end{thebibliography}
